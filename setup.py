@@ -10,6 +10,7 @@ setup(
     description='Advanced System Artifact Management & Privacy Suite',
     author='Salih Sefer',
     packages=find_packages(),
+    py_modules=['shadowstep'],
     include_package_data=True,  # Required to include MANIFEST.in data
     install_requires=read_requirements(),
     entry_points={
