@@ -10,11 +10,11 @@ setup(
     description='Advanced System Artifact Management & Privacy Suite',
     author='Salih Sefer',
     packages=find_packages(),
-    include_package_data=True,  # MANIFEST.in dosyasını okuması için şart
+    include_package_data=True,  # Required to include MANIFEST.in data
     install_requires=read_requirements(),
     entry_points={
         'console_scripts': [
-            'shadowstep=shadowstep:main',  # Terminale 'shadowstep' yazınca çalışır
+            'shadowstep=shadowstep:main',  # Run with 'shadowstep' in the terminal
         ],
     },
     classifiers=[

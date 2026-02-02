@@ -4,34 +4,34 @@ from utils.logger import log
 
 def secure_delete(file_path, passes=3):
     """
-    Belirtilen dosyayı, üzerine rastgele veriler yazarak güvenli bir şekilde siler.
-    DoD 5220.22-M standardını simüle eder.
+    Securely deletes the specified file by overwriting it with random data.
+    Simulates the DoD 5220.22-M standard.
     """
     if not os.path.exists(file_path):
-        log.error(f"Dosya bulunamadı: {file_path}")
+        log.error(f"File not found: {file_path}")
         return False
 
     try:
         file_size = os.path.getsize(file_path)
-        log.info(f"Güvenli silme başlatılıyor: {file_path} ({passes} geçiş)")
+        log.info(f"Secure delete started: {file_path} ({passes} passes)")
 
         with open(file_path, "ba+") as f:
             for i in range(passes):
                 f.seek(0)
-                # Rastgele byte verisi (Cryptographically secure random bytes kullanabiliriz ama hız için urandom yeterli)
+                # Random bytes (os.urandom is sufficient for speed here)
                 random_data = os.urandom(file_size)
                 f.write(random_data)
                 f.flush()
                 os.fsync(f.fileno())
-                log.debug(f" -> Geçiş {i+1}/{passes} tamamlandı.")
+                log.debug(f" -> Pass {i+1}/{passes} completed.")
 
         os.remove(file_path)
-        log.info(f"Dosya başarıyla imha edildi: {file_path}")
+        log.info(f"File successfully destroyed: {file_path}")
         return True
 
     except PermissionError:
-        log.error(f"Erişim reddedildi: {file_path}")
+        log.error(f"Access denied: {file_path}")
         return False
     except Exception as e:
-        log.error(f"Beklenmeyen hata: {e}")
+        log.error(f"Unexpected error: {e}")
         return False

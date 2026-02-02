@@ -9,7 +9,7 @@ logging:
 
 shredder:
   default_passes: 3
-  method: "dod_5220_22_m"  # DoD standardı
+  method: "dod_5220_22_m"  # DoD standard
 
 network:
-  spoof_oui: "Intel"  # Varsayılan üretici
+  spoof_oui: "Intel"  # Default vendor

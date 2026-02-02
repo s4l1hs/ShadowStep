@@ -7,8 +7,8 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('data/oui_list.json', 'data'),      # Kaynak -> Hedef Klasör
-        ('config/default.yaml', 'config')    # Kaynak -> Hedef Klasör
+        ('data/oui_list.json', 'data'),      # Source -> Destination folder
+        ('config/default.yaml', 'config')    # Source -> Destination folder
     ],
     hiddenimports=[],
     hookspath=[],

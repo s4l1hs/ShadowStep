@@ -1,5 +1,5 @@
 """
 ShadowStep Unit Test Suite.
-Tüm testleri çalıştırmak için ana dizinde:
+To run all tests from the project root:
 python -m unittest discover tests
 """

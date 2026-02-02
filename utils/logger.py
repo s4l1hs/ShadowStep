@@ -1,13 +1,13 @@
 import logging
 import sys
-from colorama import Fore, Style, init
+from utils.colors import Fore, Style, init
 from config import config
 
-# Colorama başlat
+# Initialize color support
 init(autoreset=True)
 
 class ColorFormatter(logging.Formatter):
-    """Log seviyelerine göre renkli çıktı üretir."""
+    """Produce colored output by log level."""
     COLORS = {
         logging.DEBUG: Fore.CYAN,
         logging.INFO: Fore.GREEN,
@@ -22,19 +22,19 @@ class ColorFormatter(logging.Formatter):
         return f"{color}{message}{Style.RESET_ALL}"
 
 def setup_logger(name="ShadowStep"):
-    """Logger yapılandırmasını kurar."""
+    """Set up logger configuration."""
     logger = logging.getLogger(name)
     
-    # Config'den seviye çek
+    # Pull level from config
     log_level = config['logging']['level'].upper()
     logger.setLevel(getattr(logging, log_level, logging.INFO))
 
-    # Konsol handler
+    # Console handler
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(ColorFormatter('%(asctime)s - [%(levelname)s] - %(message)s'))
     
     logger.addHandler(console_handler)
     return logger
 
-# Global logger nesnesi
+# Global logger instance
 log = setup_logger()
