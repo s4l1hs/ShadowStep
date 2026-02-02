@@ -1,4 +1,5 @@
 import argparse
+import platform
 import sys
 import os
 from utils.colors import Fore, Style
@@ -7,6 +8,7 @@ from core.network_utils import NetworkManager
 from utils.shredder import secure_delete
 from utils.logger import log
 from config import config
+from core.janitor import Janitor
 
 def print_banner():
     """Hacker-style ASCII Banner (Corrected)"""
@@ -47,6 +49,8 @@ def main():
     parser.add_argument('--passes', '-p', type=int, default=3, help='Number of shredder passes (Default: 3)')
     parser.add_argument('--interface', '-i', default='eth0', help='Network interface to operate on (Default: eth0)')
     parser.add_argument('--mac', metavar='MAC', help='Manual MAC address to set (e.g., 00:11:22:33:44:55)')
+    # Modül 4: Janitor (Sistem Temizliği)
+    group.add_argument('--clean', '-c', action='store_true', help='Clear system traces (History, Clipboard, DNS)')
 
     args = parser.parse_args()
 
@@ -86,6 +90,28 @@ def main():
             log.info(f"Generated random MAC: {new_mac}")
             
         nm.change_mac(new_mac)
+    # 4. JANITOR MODÜLÜ
+    elif args.clean:
+        janitor = Janitor()
+        
+        log.info("System cleaning started...")
+        
+        # 1. Clipboard Cleaning
+        janitor.clean_clipboard()
+        
+        # 2. Shell History
+        janitor.clean_shell_history()
+        
+        # 3. DNS Cache
+        janitor.flush_dns()
+        
+        # 4. Log Cleaning (Automated only on Windows for now)
+        if platform.system() == "Windows":
+            confirm = input(f"{Fore.RED}[!] Windows Event Logs will be deleted. This action is irreversible. Continue? (y/n): {Style.RESET_ALL}")
+            if confirm.lower() == 'y':
+                janitor.wipe_logs()
+        
+        log.info(f"{Fore.GREEN}Cleaning completed. Traces removed.{Style.RESET_ALL}")
 
 if __name__ == "__main__":
     try:
