@@ -6,8 +6,8 @@ from utils.logger import log
 
 class Janitor:
     """
-    Sistemdeki geçici izleri (Loglar, Geçmiş, Pano, Önbellek) temizler.
-    Dijital Ninja'nın 'duman bombası' modülüdür.
+    Cleans system traces including Clipboard, Shell History, and DNS Cache.
+    Acts as the 'Digital Smoke Bomb' for the operator.
     """
 
     def __init__(self):
@@ -15,13 +15,13 @@ class Janitor:
         self.home_dir = os.path.expanduser("~")
 
     def clean_clipboard(self):
-        """Sistem panosundaki (Clipboard) veriyi siler."""
+        """Wipes the system clipboard content."""
         try:
             if self.os_type == "Windows":
-                # Windows: clip komutu ile boşluk gönder
+                # Windows: redirect null to clip
                 os.system("echo off | clip")
             elif self.os_type == "Linux":
-                # Linux: xsel veya xclip varsa kullan
+                # Linux: try xsel or xclip
                 if shutil.which("xsel"):
                     os.system("xsel -bc")
                 elif shutil.which("xclip"):
@@ -29,77 +29,70 @@ class Janitor:
             elif self.os_type == "Darwin": # macOS
                 os.system("pbcopy < /dev/null")
             
-            log.info("Pano (Clipboard) başarıyla temizlendi.")
+            log.info("Clipboard cleared successfully.")
             return True
         except Exception as e:
-            log.error(f"Pano temizleme hatası: {e}")
+            log.error(f"Clipboard cleaning failed: {e}")
             return False
 
     def clean_shell_history(self):
-        """Bash ve Zsh geçmiş dosyalarını bulur ve içeriğini temizler."""
+        """Locates and wipes bash/zsh history files."""
         history_files = [
             os.path.join(self.home_dir, ".bash_history"),
             os.path.join(self.home_dir, ".zsh_history"),
-            os.path.join(self.home_dir, ".history") # Bazı sistemler
+            os.path.join(self.home_dir, ".history") # Generic
         ]
 
         cleaned_count = 0
         for h_file in history_files:
             if os.path.exists(h_file):
                 try:
-                    # Dosyayı silmek yerine içini boşaltıyoruz (daha az şüphe çeker)
+                    # Truncate file (wipe content, keep file)
                     open(h_file, 'w').close()
-                    log.info(f"Shell geçmişi temizlendi: {h_file}")
+                    log.info(f"Shell history wiped: {h_file}")
                     cleaned_count += 1
                 except PermissionError:
-                    log.error(f"Erişim reddedildi: {h_file}")
+                    log.error(f"Access denied: {h_file}")
         
         if cleaned_count == 0:
-            log.warning("Temizlenecek shell geçmişi bulunamadı.")
+            log.warning("No standard shell history files found.")
             
-        # Mevcut oturumun geçmişini de temizlemeye çalış (Linux/Mac)
+        # Advisory for current session
         if self.os_type != "Windows":
-            try:
-                # 'history -c' komutu subprocess ile çalışmaz çünkü shell built-in'dir.
-                # Ancak kullanıcıya uyarı verebiliriz.
-                log.info("Not: Mevcut terminal oturumunu kapatman önerilir.")
-            except:
-                pass
+            log.info("Advisory: It is recommended to close the current terminal session to clear memory buffers.")
 
     def flush_dns(self):
-        """DNS Önbelleğini temizler."""
+        """Flushes the DNS Resolver Cache."""
         try:
             if self.os_type == "Windows":
                 subprocess.run(["ipconfig", "/flushdns"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             elif self.os_type == "Darwin": # macOS
                 subprocess.run(["sudo", "killall", "-HUP", "mDNSResponder"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             elif self.os_type == "Linux":
-                # Systemd-resolve genelde kullanılır
+                # Systemd-resolve is common on modern distros
                 subprocess.run(["resolvectl", "flush-caches"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             
-            log.info("DNS önbelleği (Cache) temizlendi.")
+            log.info("DNS Cache flushed.")
         except Exception as e:
-            log.warning(f"DNS temizleme sırasında hata (Yetki gerekebilir): {e}")
+            log.warning(f"DNS flush failed (Privileges might be required): {e}")
 
     def wipe_logs(self):
         """
-        [Advanced] Sistem loglarını temizler.
-        Windows: Event Logs
-        Linux: /var/log (Root gerekir)
+        [Windows Only] Aggressive Log Wiping.
+        Clears all Event Logs using wevtutil. This creates an Event ID 1102 (Log Clear).
         """
         if self.os_type == "Windows":
-            log.info("Windows Event Logları temizleniyor (Yönetici izni gerekir)...")
+            log.warning("Starting aggressive Windows Event Log wipe (Administrator required)...")
             try:
-                # Tüm log kategorilerini listele ve temizle
-                # wevtutil el: List logs, wevtutil cl: Clear log
+                # List all logs
                 logs = subprocess.check_output(["wevtutil", "el"], text=True).splitlines()
                 for log_name in logs:
+                    # Clear each log
                     subprocess.run(["wevtutil", "cl", log_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                log.info("Windows Event Log temizliği tamamlandı.")
+                log.info("All Windows Event Logs have been cleared.")
             except Exception as e:
-                log.error(f"Log temizleme hatası: {e}")
+                log.error(f"Log wipe error: {e}")
 
         elif self.os_type == "Linux":
-            log.warning("Linux log temizliği (/var/log) sadece ROOT yetkisiyle yapılabilir.")
-            # Güvenlik için şimdilik otomatik kod eklemiyoruz, yanlışlıkla sistemi bozabilir.
-            # Ancak /var/log/auth.log veya syslog hedeflenebilir.
+            log.warning("Aggressive log wiping on Linux (/var/log) requires manual ROOT intervention.")
+            log.info("Suggestion: Use --sanitize for surgical cleaning instead.")
