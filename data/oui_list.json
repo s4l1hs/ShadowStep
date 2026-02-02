@@ -2,16 +2,47 @@
   "vendors": [
     { "prefix": "00:0C:29", "name": "VMware, Inc." },
     { "prefix": "00:50:56", "name": "VMware, Inc." },
-    { "prefix": "00:15:5D", "name": "Microsoft Corporation" },
+    { "prefix": "00:15:5D", "name": "Microsoft Hyper-V" },
     { "prefix": "00:1C:42", "name": "Parallels, Inc." },
     { "prefix": "08:00:27", "name": "PCS Systemtechnik GmbH (VirtualBox)" },
-    { "prefix": "00:1A:11", "name": "Google, Inc." },
-    { "prefix": "AC:DE:48", "name": "Private" },
+    
+    { "prefix": "F8:FF:C2", "name": "Apple, Inc. (MacBook/iPhone)" },
+    { "prefix": "BC:92:6B", "name": "Apple, Inc." },
+    { "prefix": "C8:E0:EB", "name": "Apple, Inc." },
+    { "prefix": "34:36:3B", "name": "Apple, Inc." },
+    
+    { "prefix": "00:1B:21", "name": "Intel Corporate (Common WiFi)" },
+    { "prefix": "60:67:20", "name": "Intel Corporate" },
+    { "prefix": "A0:88:69", "name": "Intel Corporate" },
+    
+    { "prefix": "18:03:73", "name": "Dell Inc." },
+    { "prefix": "00:14:22", "name": "Dell Inc." },
+    { "prefix": "F0:1F:AF", "name": "Dell Inc." },
+    
+    { "prefix": "3C:D9:2B", "name": "Hewlett Packard (HP)" },
+    { "prefix": "00:25:B3", "name": "Hewlett Packard" },
+    
+    { "prefix": "E0:2A:82", "name": "Lenovo" },
+    { "prefix": "00:23:10", "name": "Lenovo Mobile" },
+    
+    { "prefix": "F0:DEF1", "name": "Cisco Systems, Inc" },
+    { "prefix": "00:00:0C", "name": "Cisco Systems, Inc" },
+    { "prefix": "00:22:6B", "name": "Cisco Systems, Inc" },
+    
+    { "prefix": "24:4B:FE", "name": "Samsung Electronics" },
+    { "prefix": "3C:5A:37", "name": "Samsung Electronics" },
+    
+    { "prefix": "AC:DE:48", "name": "Private / Random Local" },
+    
+    { "prefix": "B8:27:EB", "name": "Raspberry Pi Foundation" },
+    { "prefix": "DC:A6:32", "name": "Raspberry Pi Trading Ltd" },
+    
+    { "prefix": "F0:9F:C2", "name": "Ubiquiti Networks Inc." },
+    { "prefix": "74:83:C2", "name": "Ubiquiti Networks Inc." },
+    
     { "prefix": "00:E0:4C", "name": "Realtek Semiconductor Corp." },
     { "prefix": "54:05:DB", "name": "Intel Corporate" },
-    { "prefix": "00:1B:21", "name": "Intel Corporate" },
-    { "prefix": "3C:D9:2B", "name": "Hewlett Packard" },
-    { "prefix": "F0:DEF1", "name": "Cisco Systems, Inc" },
-    { "prefix": "00:00:0C", "name": "Cisco Systems, Inc" }
+    { "prefix": "00:1A:11", "name": "Google, Inc." },
+    { "prefix": "D8:50:E6", "name": "ASUSTek COMPUTER INC." }
   ]
 }
