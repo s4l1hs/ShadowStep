@@ -1,3 +1,5 @@
 pyyaml
-psutil
 colorama
+setproctitle
+psutil
+pywin32; sys_platform == 'win32'
