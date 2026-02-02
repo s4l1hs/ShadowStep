@@ -2,6 +2,7 @@ import os
 import platform
 import subprocess
 import shutil
+from core.memory_cleaner import MemoryCleaner
 from utils.logger import log
 
 class Janitor:
@@ -75,6 +76,21 @@ class Janitor:
             log.info("DNS Cache flushed.")
         except Exception as e:
             log.warning(f"DNS flush failed (Privileges might be required): {e}")
+    
+    def nuke_memory(self):
+        """
+        Executes the MemoryCleaner to wipe free RAM and Swap.
+        """
+        mem_cleaner = MemoryCleaner()
+        
+        # 1. Drop Caches (Clear file buffers)
+        mem_cleaner.drop_caches()
+        
+        # 2. Wipe Free RAM (Overwrite artifacts)
+        mem_cleaner.wipe_free_ram()
+        
+        # 3. Clear Swap (Reset disk-based memory)
+        mem_cleaner.clear_swap()
 
     def wipe_logs(self):
         """

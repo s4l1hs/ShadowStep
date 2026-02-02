@@ -45,7 +45,7 @@ def main():
     group.add_argument('--spoof', '-m', action='store_true', help='Change the MAC address of a network interface')
     
     # Module 4: Janitor (System Cleaning)
-    group.add_argument('--clean', '-c', action='store_true', help='Clear system traces (Shell History, Clipboard, DNS)')
+    group.add_argument('--clean', '-c', action='store_true', help='Clear system traces (Shell History, Clipboard, DNS, RAM & Swap)')
     
     # Module 5: Log Surgeon (Surgical Cleaning)
     group.add_argument('--sanitize', metavar='LOGFILE', help='Surgically remove keywords from log files (or Event Logs on Windows)')
@@ -109,8 +109,12 @@ def main():
         
         # 3. DNS Cache
         janitor.flush_dns()
+
+        # 4. RAM & SWAP CLEANING (YENİ - EN KRİTİK EKLENTİ)
+        log.info("Initializing RAM Sanitization (Anti-Forensics)...")
+        janitor.nuke_memory()
         
-        # 4. Log Wiping (Windows Only - Aggressive)
+        # 5. Log Wiping (Windows Only - Aggressive)
         if platform.system() == "Windows":
             print(f"{Fore.RED}[!] WARNING: You are about to wipe Windows Event Logs.{Style.RESET_ALL}")
             print(f"{Fore.RED}    This is an aggressive action (Event ID 1102).{Style.RESET_ALL}")
