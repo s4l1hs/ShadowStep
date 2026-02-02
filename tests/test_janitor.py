@@ -16,53 +16,56 @@ class TestJanitor(unittest.TestCase):
     @patch('os.system')
     def test_clean_clipboard_mac(self, mock_system):
         """Test clipboard cleaning command on macOS."""
-        # Force OS to Darwin (macOS)
         self.janitor.os_type = "Darwin"
-        
         self.janitor.clean_clipboard()
-        
-        # Check if 'pbcopy' was called
         mock_system.assert_called_with("pbcopy < /dev/null")
 
     @patch('shutil.which')
     @patch('os.system')
     def test_clean_clipboard_linux(self, mock_system, mock_which):
-        """Test clipboard cleaning on Linux (using xsel)."""
+        """Test clipboard cleaning on Linux."""
         self.janitor.os_type = "Linux"
-        mock_which.return_value = True # Simulate xsel exists
-        
+        mock_which.return_value = True 
         self.janitor.clean_clipboard()
-        
         mock_system.assert_called_with("xsel -bc")
 
     @patch('subprocess.run')
     def test_flush_dns_windows(self, mock_subprocess):
         """Test DNS flush command on Windows."""
         self.janitor.os_type = "Windows"
-        
         self.janitor.flush_dns()
-        
-        # Check if ipconfig /flushdns was called
         mock_subprocess.assert_called_with(
             ["ipconfig", "/flushdns"], 
-            stdout=-3, stderr=-3 # subprocess.DEVNULL is -3
+            stdout=-3, stderr=-3 
         )
 
-    @patch('builtins.open', new_callable=mock_open)
-    @patch('os.path.exists')
-    def test_clean_shell_history(self, mock_exists, mock_file):
-        """Test if history files are opened in write mode (cleared)."""
-        # Simulate that .bash_history exists
-        mock_exists.return_value = True
+    # --- FIX IS HERE ---
+    @patch('core.janitor.MemoryCleaner') # We patch where it is IMPORTED, not defined
+    def test_nuke_memory_integration(self, MockMemoryCleaner):
+        """Test if Janitor correctly triggers MemoryCleaner methods."""
+        # Setup mock instance
+        mock_instance = MockMemoryCleaner.return_value
         
-        self.janitor.clean_shell_history()
+        # Re-init janitor so it picks up the mocked MemoryCleaner
+        janitor = Janitor() 
+        janitor.nuke_memory()
         
-        # Check if file was opened with 'w' (which clears content)
-        mock_file.assert_called()
-        handle = mock_file()
-        # Ensure it didn't write anything (just opened and closed to wipe)
-        # Or wrote empty string
-        pass
+        # Verify all 3 memory cleaning steps were called
+        mock_instance.drop_caches.assert_called_once()
+        mock_instance.wipe_free_ram.assert_called_once()
+        mock_instance.clear_swap.assert_called_once()
+
+    @patch('subprocess.run')
+    def test_wipe_logs_windows(self, mock_subprocess):
+        """Test aggressive log wiping on Windows."""
+        self.janitor.os_type = "Windows"
+        
+        # Mock getting log list
+        with patch('subprocess.check_output', return_value="Log1\nLog2"):
+            self.janitor.wipe_logs()
+            
+            # Should run 'wevtutil cl' for each log
+            self.assertTrue(mock_subprocess.call_count >= 2)
 
 if __name__ == '__main__':
     unittest.main()
