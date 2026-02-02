@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 import sys
 import os
 
-# Add project root to path so modules can be found
+# Proje kök dizinini path'e ekle
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from core.network_utils import NetworkManager
@@ -11,11 +11,11 @@ from core.network_utils import NetworkManager
 class TestNetworkManager(unittest.TestCase):
 
     def setUp(self):
-        """Run before each test."""
+        """Her testten önce çalışır."""
         self.nm = NetworkManager(interface="eth0")
 
     def test_generate_mac_format(self):
-        """Generated MAC address matches XX:XX:XX:XX:XX:XX format."""
+        """Üretilen MAC adresi XX:XX:XX:XX:XX:XX formatında mı?"""
         mac = self.nm.generate_mac()
         self.assertEqual(len(mac.split(':')), 6)
         self.assertEqual(len(mac), 17)
@@ -23,9 +23,15 @@ class TestNetworkManager(unittest.TestCase):
     @patch('subprocess.run')
     @patch('platform.system')
     def test_change_mac_linux(self, mock_system, mock_subprocess):
-        """On Linux, MAC change calls subprocess."""
+        """Linux üzerinde MAC değişimi subprocess çağırıyor mu?"""
         # Mock Linux environment
         mock_system.return_value = "Linux"
+        
+        # --- KRİTİK DÜZELTME ---
+        # Nesne setUp'da "Darwin" (Mac) olarak oluştu. 
+        # Testin geçmesi için onu manuel olarak Linux'a çeviriyoruz:
+        self.nm.os_type = "Linux"
+        # -----------------------
         
         # Run function
         result = self.nm.change_mac("00:11:22:33:44:55")
@@ -40,6 +46,10 @@ class TestNetworkManager(unittest.TestCase):
     def test_change_mac_windows_fail(self, mock_system):
         """Linux commands should not run on Windows."""
         mock_system.return_value = "Windows"
+        
+        # Testin tutarlılığı için burayı da Windows yapalım
+        self.nm.os_type = "Windows"
+        
         result = self.nm.change_mac("00:11:22:33:44:55")
         self.assertFalse(result)
 
