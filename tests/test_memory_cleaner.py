@@ -6,7 +6,7 @@ import os
 # Project root to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from core.memory_cleaner import MemoryCleaner
+from shadowstep.core.memory_cleaner import MemoryCleaner
 
 class TestMemoryCleaner(unittest.TestCase):
 

@@ -6,7 +6,7 @@ import os
 # Proje kök dizinini path'e ekle
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from core.network_utils import NetworkManager
+from shadowstep.core.network_utils import NetworkManager
 
 class TestNetworkManager(unittest.TestCase):
 

@@ -4,7 +4,7 @@ import platform
 import subprocess
 import sys
 import shutil
-from utils.logger import log
+from shadowstep.utils.logger import log
 
 # Conditional imports for Windows libraries
 # We use try/except to prevent crashes on Linux/macOS

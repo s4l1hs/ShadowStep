@@ -2,8 +2,8 @@ import os
 import platform
 import subprocess
 import shutil
-from core.memory_cleaner import MemoryCleaner
-from utils.logger import log
+from .memory_cleaner import MemoryCleaner
+from shadowstep.utils.logger import log
 
 class Janitor:
     """

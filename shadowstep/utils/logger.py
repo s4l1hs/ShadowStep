@@ -1,7 +1,7 @@
 import logging
 import sys
-from utils.colors import Fore, Style, init
-from config import config
+from .colors import Fore, Style, init
+from shadowstep.config import config
 
 # Initialize color support
 init(autoreset=True)

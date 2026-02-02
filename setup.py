@@ -1,27 +1,36 @@
 from setuptools import setup, find_packages
 
-def read_requirements():
-    with open('requirements.txt') as req:
-        return req.read().splitlines()
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 setup(
-    name='shadowstep',
-    version='1.0.0',
-    description='Advanced System Artifact Management & Privacy Suite',
-    author='Salih Sefer',
+    name="shadowstep",
+    version="1.0.0",
+    author="Salih Sefer",
+    author_email="sefersalih017@gmail.com",
+    description="Advanced Anti-Forensics & System Artifact Management Tool",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/s4l1hs/ShadowStep",
     packages=find_packages(),
-    py_modules=['shadowstep'],
-    include_package_data=True,  # Required to include MANIFEST.in data
-    install_requires=read_requirements(),
-    entry_points={
-        'console_scripts': [
-            'shadowstep=shadowstep:main',  # Run with 'shadowstep' in the terminal
-        ],
-    },
     classifiers=[
-        'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Topic :: Security",
+        "Environment :: Console",
     ],
     python_requires='>=3.6',
+    install_requires=[
+        "pyyaml",
+        "colorama",
+        "setproctitle",
+        "psutil",
+        "pywin32; sys_platform == 'win32'"
+    ],
+    entry_points={
+        'console_scripts': [
+            'shadowstep=shadowstep.cli:main', 
+        ],
+    },
 )

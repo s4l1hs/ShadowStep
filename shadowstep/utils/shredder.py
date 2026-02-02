@@ -1,6 +1,6 @@
 import os
 import random
-from utils.logger import log
+from .logger import log
 
 def secure_delete(file_path, passes=3):
     """

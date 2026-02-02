@@ -2,13 +2,13 @@ import argparse
 import platform
 import sys
 import os
-from utils.colors import Fore, Style
-from core.forensic_view import TimeStomper
-from core.network_utils import NetworkManager
-from utils.shredder import secure_delete
-from utils.logger import log
-from config import config
-from core.janitor import Janitor
+from shadowstep.utils.colors import Fore, Style
+from shadowstep.core.forensic_view import TimeStomper
+from shadowstep.core.network_utils import NetworkManager
+from shadowstep.utils.shredder import secure_delete
+from shadowstep.utils.logger import log
+from shadowstep.config import config
+from shadowstep.core.janitor import Janitor
 
 def print_banner():
     """Hacker-style ASCII Banner"""

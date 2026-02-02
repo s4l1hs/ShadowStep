@@ -1,6 +1,6 @@
 import unittest
 import os
-from utils.shredder import secure_delete
+from shadowstep.utils.shredder import secure_delete
 
 class TestShredder(unittest.TestCase):
     def setUp(self):

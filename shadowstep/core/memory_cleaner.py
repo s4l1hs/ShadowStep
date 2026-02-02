@@ -3,7 +3,7 @@ import sys
 import platform
 import subprocess
 import gc
-from utils.logger import log
+from shadowstep.utils.logger import log
 
 try:
     import psutil

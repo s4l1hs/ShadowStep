@@ -3,7 +3,7 @@ import json
 import random
 import subprocess
 import platform
-from utils.logger import log
+from shadowstep.utils.logger import log
 
 class NetworkManager:
     """

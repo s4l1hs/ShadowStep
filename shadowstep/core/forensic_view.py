@@ -1,7 +1,7 @@
 import os
 import platform
 import time
-from utils.logger import log
+from shadowstep.utils.logger import log
 
 # Load platform-specific libraries
 if platform.system() == "Windows":

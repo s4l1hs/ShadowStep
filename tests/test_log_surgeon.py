@@ -6,7 +6,7 @@ import tempfile
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from core.log_surgeon import LogSurgeon
+from shadowstep.core.log_surgeon import LogSurgeon
 
 class TestLogSurgeon(unittest.TestCase):
 
