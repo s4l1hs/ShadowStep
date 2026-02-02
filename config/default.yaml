@@ -1,0 +1,15 @@
+app:
+  name: "ShadowStep"
+  version: "1.0.0"
+  environment: "production"
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file_path: "shadowstep.log"
+
+shredder:
+  default_passes: 3
+  method: "dod_5220_22_m"  # DoD standardı
+
+network:
+  spoof_oui: "Intel"  # Varsayılan üretici
