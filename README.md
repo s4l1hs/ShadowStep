@@ -1,6 +1,9 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/s4l1hs/ShadowStep/main/assets/banner.png" alt="ShadowStep Banner">
-</p>
+   _____ __               __               _____ __
+  / ___// /_  ____ ______/ /___ _      __ / ___// /____  ____
+  \__ \/ __ \/ __ `/ __  / __ \ | /| / / \__ \/ __/ _ \/ __ \\
+ ___/ / / / / /_/ / /_/ / /_/ / |/ |/ / ___/ / /_/  __/ /_/ /
+/____/_/ /_/\__,_/\__,_/\____/|__/|__/ /____/\__/\___/ .___/ 
+                                                    /_/      
 
 # ShadowStep
 
