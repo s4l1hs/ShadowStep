@@ -1,11 +1,13 @@
+   ```
    _____ __               __               _____ __
-  / ___// /_  ____ ______/ /___ _      __ / ___// /____  ____
-  \__ \/ __ \/ __ `/ __  / __ \ | /| / / \__ \/ __/ _ \/ __ \\
- ___/ / / / / /_/ / /_/ / /_/ / |/ |/ / ___/ / /_/  __/ /_/ /
-/____/_/ /_/\__,_/\__,_/\____/|__/|__/ /____/\__/\___/ .___/ 
-                                                    /_/      
+      / ___// /_  ____ ______/ /___ _      __ / ___// /____  ____
+      \__ \/ __ \/ __ `/ __  / __ \ | /| / / \__ \/ __/ _ \/ __ \
+    ___/ / / / / /_/ / /_/ / /_/ / |/ |/ / ___/ / /_/  __/ /_/ /
+   /____/_/ /_/\__,_/\__,_/\____/|__/|__/ /____/\__/\___/ .___/
+                                                                                 /_/
+   ```
 
-# ShadowStep
+   # ShadowStep
 
 **ShadowStep** is a professional-grade, modular toolkit for **artifact management**, **metadata manipulation**, and **system sanitization**. Designed for security professionals and Red Team operators, it provides a cooperative suite of utilities to automate cover-track workflows in authorized, legal, and controlled environments.
 
