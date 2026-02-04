@@ -50,6 +50,9 @@ ShadowStep provides a set of cooperative utilities for managing system artifacts
 - `config/default.yaml` — default configuration values (app metadata, logging level, shredder defaults, network defaults).
 
 ## 🛠️ Installation
+Two installation paths are supported.
+
+### ✅ Option A — PyPI (recommended)
 Recommended: create and use a Python virtual environment.
 
 ```bash
@@ -61,6 +64,19 @@ pip install -e .
 ```
 
 After installing with `pip install -e .`, the `shadowstep` console script will be available on your PATH and resolves to `shadowstep:main`.
+
+### ✅ Option B — npm (global CLI)
+This installs a small Node.js wrapper and automatically installs the Python package via pip.
+
+```bash
+npm install -g shadowstep
+```
+
+If Python is not on PATH, you can set it manually:
+
+```bash
+export SHADOWSTEP_PYTHON=/path/to/python3
+```
 
 ## ⚙️ Configuration
 Default configuration is located in `config/default.yaml`. The project loads this YAML at import time via `config/__init__.py`. Example config fields include:

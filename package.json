@@ -1,0 +1,34 @@
+{
+  "name": "shadowstep",
+  "version": "1.0.1",
+  "description": "ShadowStep CLI wrapper (npm) for the Python package",
+  "license": "MIT",
+  "author": "Salih Sefer <sefersalih017@gmail.com>",
+  "homepage": "https://github.com/s4l1hs/ShadowStep",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s4l1hs/ShadowStep.git"
+  },
+  "keywords": [
+    "security",
+    "cli",
+    "forensics",
+    "antiforensics",
+    "shadowstep"
+  ],
+  "bin": {
+    "shadowstep": "./bin/shadowstep.js"
+  },
+  "files": [
+    "bin/shadowstep.js",
+    "bin/postinstall.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "postinstall": "node ./bin/postinstall.js"
+  }
+}
