@@ -45,7 +45,7 @@ pip install shadowstep
 Install the CLI using the provided formula or tap.
 
 ```bash
-brew tap s4l1hs/shadowstep
+brew tap s4l1hs/homebrew-shadowstep
 brew install shadowstep
 ```
 
