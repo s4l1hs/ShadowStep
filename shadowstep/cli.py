@@ -29,8 +29,11 @@ def main():
     
     parser = argparse.ArgumentParser(
         description="ShadowStep: Advanced System Artifact & Metadata Management Suite",
-        epilog="Use with caution. Authorized use only."
+        epilog="Use with caution. Authorized use only.",
+        add_help=False
     )
+
+    parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
     # Primary command group
     group = parser.add_mutually_exclusive_group(required=True)
@@ -39,7 +42,7 @@ def main():
     group.add_argument('--shred', '-s', metavar='FILE', help='Securely delete a file (DoD 5220.22-M)')
     
     # Module 2: Timestomp (Metadata)
-    group.add_argument('--timestomp', '-ts', metavar='TARGET', help='Change target file timestamps')
+    group.add_argument('--timestomp', '-t', '-ts', metavar='TARGET', help='Change target file timestamps')
     
     # Module 3: Network (Spoof)
     group.add_argument('--spoof', '-m', action='store_true', help='Change the MAC address of a network interface')
@@ -48,13 +51,13 @@ def main():
     group.add_argument('--clean', '-c', action='store_true', help='Clear system traces (Shell History, Clipboard, DNS, RAM & Swap)')
     
     # Module 5: Log Surgeon (Surgical Cleaning)
-    group.add_argument('--sanitize', metavar='LOGFILE', help='Surgically remove keywords from log files (or Event Logs on Windows)')
+    group.add_argument('--sanitize', '-z', metavar='LOGFILE', help='Surgically remove keywords from log files (or Event Logs on Windows)')
 
     # Helper arguments
     parser.add_argument('--ref', '-r', metavar='FILE', help='Reference file to copy timestamps from (for --timestomp)')
     parser.add_argument('--passes', '-p', type=int, default=3, help='Number of shredder passes (Default: 3)')
     parser.add_argument('--interface', '-i', default='eth0', help='Network interface to operate on (Default: eth0)')
-    parser.add_argument('--mac', metavar='MAC', help='Manual MAC address to set (e.g., 00:11:22:33:44:55)')
+    parser.add_argument('--mac', '-M', metavar='MAC', help='Manual MAC address to set (e.g., 00:11:22:33:44:55)')
     parser.add_argument('--keywords', '-k', nargs='+', help='Keywords to remove from logs (e.g., --keywords 192.168.1.5 admin)')
 
     args = parser.parse_args()
