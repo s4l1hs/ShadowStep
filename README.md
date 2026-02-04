@@ -50,7 +50,7 @@ ShadowStep provides a set of cooperative utilities for managing system artifacts
 - `config/default.yaml` — default configuration values (app metadata, logging level, shredder defaults, network defaults).
 
 ## 🛠️ Installation
-Two installation paths are supported.
+Three installation paths are supported.
 
 ### ✅ Option A — PyPI (recommended)
 Recommended: create and use a Python virtual environment.
@@ -76,6 +76,20 @@ If Python is not on PATH, you can set it manually:
 
 ```bash
 export SHADOWSTEP_PYTHON=/path/to/python3
+```
+
+### ✅ Option C — Homebrew (macOS)
+Homebrew can install the CLI using the provided formula.
+
+```bash
+brew install --formula https://raw.githubusercontent.com/s4l1hs/ShadowStep/main/Formula/shadowstep.rb
+```
+
+If you prefer a tap, create a tap repo (e.g., `homebrew-shadowstep`) and move the formula there, then:
+
+```bash
+brew tap s4l1hs/shadowstep
+brew install shadowstep
 ```
 
 ## ⚙️ Configuration
