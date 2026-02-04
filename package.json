@@ -1,6 +1,6 @@
 {
   "name": "shadowstep",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ShadowStep CLI wrapper (npm) for the Python package",
   "license": "MIT",
   "author": "Salih Sefer <sefersalih017@gmail.com>",
