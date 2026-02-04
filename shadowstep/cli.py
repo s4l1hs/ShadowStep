@@ -134,7 +134,7 @@ def main():
             log.info("Example: shadowstep --sanitize /var/log/auth.log --keywords 10.0.0.5 username")
             sys.exit(1)
             
-        from core.log_surgeon import LogSurgeon
+        from shadowstep.core.log_surgeon import LogSurgeon
         surgeon = LogSurgeon()
         
         log.info(f"Surgical log cleaning started. Targets: {args.keywords}")
