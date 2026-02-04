@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="shadowstep",
-    version="1.0.0",
+    version="1.0.1",
     author="Salih Sefer",
     author_email="sefersalih017@gmail.com",
     description="Advanced Anti-Forensics & System Artifact Management Tool",
